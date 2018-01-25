@@ -4,7 +4,9 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "dev": "watch 'npm run build' src",
     "build": "babel src/ -d lib/",
+    "watchFlow": "watch 'npm run flow'",
     "prepublish": "npm run build",
     "flow": "flow"
   },
@@ -20,7 +22,14 @@
   "homepage": "https://github.com/JamesGotsell/ricky-morty-vanilla-js#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.63.1"
+    "flow-bin": "^0.63.1",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "eslint-plugin-flowtype": "^2.42.0"
   }
 }
