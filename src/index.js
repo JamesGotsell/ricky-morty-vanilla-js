@@ -1,5 +1,4 @@
 
-console.log('boom')
 window.onload = function(e){ 
 
 let quoteItem = [] 
