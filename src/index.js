@@ -1,5 +1,6 @@
-// @flow
+
 console.log('boom')
+window.onload = function(e){ 
 
 let quoteItem = [] 
 
@@ -15,9 +16,16 @@ let stuff = () => {
   })
 }
 
+let addQuoteToLocalStorage = () => {
+  console.log('boom')
+  console.log(e.target)
+
+}
+
 stuff().then( (data) =>{
    console.log(data)
-   AddToDom(data)
+   let arr = [...data.data]
+   AddToDom(arr)
 })
 .catch(function(error) {
   console.log('oh no', error)
@@ -25,16 +33,37 @@ stuff().then( (data) =>{
 
 
 
-let root = document.getElementsByClassName('main-container')
-console.log(root)
+const AddToDom = (arr:Array<string>) => {
 
-const AddToDom = (quoteArray:Array<string>) => {
+  console.log(arr)
   let root = document.getElementsByClassName('main-container')
+  arr.map( (el , i ) => { 
+    console.log(i) 
+    
+    let li = document.createElement('li');
+    
+    let span =  document.createElement('span');
+    
+    span.appendChild(document.createTextNode(el));
+    
+    span.setAttribute('class', `text-${i+1}`)
+    
+    let div = document.createElement('div') 
+    
+    let appendSpanToLi = div.appendChild(span);
 
-  console.log(quoteArray)
-  quoteArray.map( el => { 
-    console.log(el) 
-    return el
+    let button = document.createElement('button')
+
+    button.addEventListener('click', addQuoteToLocalStorage)
+    
+    button.appendChild(document.createTextNode('add quote to localstorage'));
+    
+    div.appendChild(appendSpanToLi) 
+    
+    div.appendChild(button)  
+    
+    root[0].appendChild(div)
+
   })
 }
-
+}
