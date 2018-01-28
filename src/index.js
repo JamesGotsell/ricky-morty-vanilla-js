@@ -15,9 +15,15 @@ let stuff = () => {
   })
 }
 
-let addQuoteToLocalStorage = () => {
+let addQuoteToLocalStorage = (event) => {
   console.log('boom')
-  console.log(e.target)
+  console.log(event)
+  var targetElement = event.target || event.srcElement;
+  console.log(targetElement);
+  // refencing the window - document 
+  // var itemKey = el.previousSibling;
+  // console.log(itemKey)
+  // localStorage.setItem('quote', JSON.stringify())
 
 }
 
@@ -53,7 +59,7 @@ const AddToDom = (arr:Array<string>) => {
 
     let button = document.createElement('button')
 
-    button.addEventListener('click', addQuoteToLocalStorage)
+    button.addEventListener('click', addQuoteToLocalStorage(event))
     
     button.appendChild(document.createTextNode('add quote to localstorage'));
     
