@@ -15,17 +15,34 @@ let stuff = () => {
   })
 }
 
-let addQuoteToLocalStorage = (event) => {
-  console.log('boom')
-  console.log(event)
-  var targetElement = event.target || event.srcElement;
-  console.log(targetElement);
-  // refencing the window - document 
-  // var itemKey = el.previousSibling;
-  // console.log(itemKey)
-  // localStorage.setItem('quote', JSON.stringify())
-
+let addQuoteToLocalStorage = (i) => {
+  // looks at btn with class of i 
+  let refBtn = document.querySelector(`.text-${i+1}`)
+  // gets the data within the span 
+  let quoteData = refBtn.innerHTML;
+  // creates an id to be ref later 
+  let id = i+1
+  // gets length of localStorage obj 
+  let localstorageI = localStorage.length;
+ // if length zero add to to localstorage 
+  if(localStorage.length === 0){
+    localStorage.setItem(id, JSON.stringify(quoteData))
+  }
+  else {
+    // checks length - loops over length and compares key to id 
+     let len = localStorage.length 
+    for ( var i = 0, len; i < len; ++i){
+        console.log(id)
+        let key = localStorage.key(i)
+        if(id == key){
+          // if the same increment id by one then add to localstorage 
+          id = localstorageI+1
+          localStorage.setItem(id, JSON.stringify(quoteData))
+        }
+   }
+  } 
 }
+
 
 stuff().then( (data) =>{
    console.log(data)
@@ -39,7 +56,7 @@ stuff().then( (data) =>{
 
 
 const AddToDom = (arr:Array<string>) => {
-
+ /// data from api added to the dom 
   console.log(arr)
   let root = document.getElementsByClassName('main-container')
   arr.map( (el , i ) => { 
@@ -59,10 +76,13 @@ const AddToDom = (arr:Array<string>) => {
 
     let button = document.createElement('button')
 
-    button.addEventListener('click', addQuoteToLocalStorage(event))
+    
     
     button.appendChild(document.createTextNode('add quote to localstorage'));
-    
+    button.addEventListener('click', () => { 
+               addQuoteToLocalStorage(i)
+              // getElement(i)
+            }, false)
     div.appendChild(appendSpanToLi) 
     
     div.appendChild(button)  
